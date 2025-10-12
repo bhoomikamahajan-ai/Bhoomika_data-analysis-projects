@@ -30,8 +30,6 @@ where title LIKE '%happy%'
 
 --Q. 7
 
-
-
 SELECT book_id, authors, title, average_rating as 'rating'
 FROM BooksDB.dbo.books
 WHERE authors IN ('Bill Watterson','Brandon Sanderson', 'J.K. Rowling')
@@ -43,7 +41,7 @@ Select authors
   From BooksDB.dbo.books
   where authors BETWEEN 'rock'and 'roll'
 
---part 2
+--Part 2
 --which author has written the most book?
 
 SELECT Top 1 authors, count(*) as Books_Count
