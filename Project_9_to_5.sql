@@ -1,3 +1,4 @@
+/*
 SELECT *
 FROM LaborStatisticsDB.dbo.datatype
 WHERE data_type_text like '%Women%'
@@ -33,4 +34,14 @@ where data_type_code = 10
 
 SELECT COUNT(series_id)
 FROM LaborStatisticsDB.dbo.annual_2016
-where series_id like '%10'
+where series_id like '%10'*/
+
+--How many production/nonsupervisory employees were reported in 2016? Round to the nearest whole number.
+
+SELECT  OUNT(*) as Total_Prod_Sup_EMP
+FROM LaborStatisticsDB.dbo.annual_2016
+WHERE SUBSTRING(series_id,13,1) = 6
+
+
+SELECT LEN(series_id)
+FROM LaborStatisticsDB.dbo.annual_2016

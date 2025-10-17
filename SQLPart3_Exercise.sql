@@ -70,9 +70,13 @@ on b.book_id = tr.book_id
 GROUP BY [user_id]
 ORDER BY to_read_list DESC;
 
-SELECT title as to_read_list
+SELECT b.title as to_read_list
 FRom BooksDB.dbo.books b  
 LEFT JOIN BooksDB.dbo.to_read tr  
 ON b.book_id = tr.book_id
-where [user_id]= 38457;
+where tr.[user_id]= 14771;
+
+SELECT *
+FROM BooksDB.dbo.to_read
+WHERE [user_id] =38457
 
