@@ -43,5 +43,15 @@ WHERE  average_rating >= 4.2
 ORDER BY average_rating DESC;
 
 
+---Part A:   Write a query that compares the publication time
+-- with average reader ratings.
 
+USE BooksDB
 
+SELECT title, original_publication_year,average_rating
+FROM books
+WHERE average_rating > (
+    SELECT AVG(average_rating)
+    FROM books
+)   
+ORDER BY original_publication_year, title;
