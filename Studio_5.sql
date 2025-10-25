@@ -306,22 +306,89 @@ Update the appropriate patron with the loan_id for the new row created in the lo
 You can use any patron and book that strikes your fancy to create and test out this query.
 */
 
-Book id = 10
+Book id = 20
 Patron id = 7
 
 -- Change available to 0 (false) for the appropriate book.
 UPDATE Sep2025JunkDB.bhoomika_mahajan.book
 SET available = 0
-WHERE book_id = 10;
+WHERE book_id = 20;
 
 
 --  Insert a new loan record with today's date
 INSERT INTO Sep2025JunkDB.bhoomika_mahajan.loan (patron_id, book_id, date_out)
-VALUES (7, 10, GETDATE());
+VALUES (7, 20, GETDATE());
 
---SELECT * FRom Sep2025JunkDB.bhoomika_mahajan.book
+--SELECT * FRom Sep2025JunkDB.bhoomika_mahajan.patron
 
 -- Update the patron record with this new loan_id
-UPDATE patrons
-SET loan_id = @new_loan_id
-WHERE patron_id = @patron_id;
+UPDATE Sep2025JunkDB.bhoomika_mahajan.patron
+SET loan_id = 1
+WHERE patron_id = 7
+
+/*Work with the same patron and book as you create your query to check a book back into the library.
+
+The check a book back in, your query need to do the following:
+
+Change available to 1 (true) for the appropriate book.
+Update the appropriate row in the loan table with today's date as the date_in.
+Update the appropriate patron changing loan_id back to NULL.
+Once you have created these queries, loan out 5 new books to 5 different patrons.
+
+Book id = 10
+Patron id = 7
+
+/*
+
+UPDATE Sep2025JunkDB.bhoomika_mahajan.book
+SET available = 1
+Where book_id = 10;
+
+UPDATE Sep2025JunkDB.bhoomika_mahajan.loan 
+SET date_in = GETDATE()
+WHERE loan_id =1
+
+UPDATE Sep2025JunkDB.bhoomika_mahajan.patron
+SET loan_id = NULL
+where patron_id = 7 */
+
+--Write a query that returns a temporary table for a patron that shows them all of their loans.
+
+SELECT * INTO #loanpatron
+FROM Sep2025JunkDB.bhoomika_mahajan.patron
+WHERE patron_id = 7;
+
+SELECT * FROM #loanpatron
+
+--Create a query that returns the names of the patrons with the genre of every book they currently have checked out.
+
+
+*/
+
+SELECT a.first_name, a.last_name, g.genres
+FROM Sep2025JunkDB.bhoomika_mahajan.author AS a
+INNER JOIN Sep2025JunkDB.bhoomika_mahajan.book AS b ON b.author_id = a.author_id 
+INNER JOIN Sep2025JunkDB.bhoomika_mahajan.genre AS g ON b.genre_id = g.genre_id;
+
+
+
+Create a new table for reference materials using the following code:
+
+CREATE TABLE Sep2025JunkDB.bhoomika_mahajan.reference_books (
+    reference_id INT IDENTITY(1,1) PRIMARY KEY,
+    edition INT,
+   
+    book_id INT FOREIGN KEY REFERENCES Sep2025JunkDB.bhoomika_mahajan.book(book_id)
+        ON UPDATE SET NULL
+        ON DELETE SET NULL
+);
+INSERT INTO Sep2025JunkDB.bhoomika_mahajan.reference_books (edition, book_id)
+VALUES (5,32);
+
+SELECT * FROM Sep2025JunkDB.bhoomika_mahajan.reference_books
+
+--A reference book cannot leave the library. 
+--How would you modify either the reference_book table or the book table to make sure that doesn't happen? 
+ UPDATE Sep2025JunkDB.bhoomika_mahajan.book
+ SET available= 'Error: Can not Check out'
+ WHERE book_id = 32;
