@@ -273,7 +273,7 @@ WHERE s.data_type_code = 07
 GROUP BY i.industry_name
 ORDER BY AVG(j.value) ASC;
 
-
+USE LaborStatisticsDB
 SELECT TOP 1
     i.industry_name,
     j.value AS total_weekly_payroll
@@ -285,9 +285,9 @@ JOIN industry AS i
 WHERE s.data_type_code = 82
 ORDER BY j.value DESC;
 
+USE LaborStatisticsDB
 
-
-SELECT TOP 5
+SELECT 
     i.industry_name,
     AVG(j.value) AS avg_weekly_hours
 FROM january_2017 AS j
@@ -299,7 +299,23 @@ WHERE s.data_type_code = 07
 GROUP BY i.industry_name
 ORDER BY AVG(j.value) DESC;
 
+UNION 
 
+
+SELECT 
+  i.industry_name,
+    AVG(j.value) AS avg_weekly_earnings
+FROM january_2017 AS j
+JOIN series AS s 
+    ON j.series_id = s.series_id
+JOIN industry AS i 
+    ON s.industry_code = i.industry_code
+WHERE s.data_type_code = 08
+GROUP BY i.industry_name
+ORDER BY AVG(j.value) DESC;
+
+
+USE LaborStatisticsDB
 SELECT TOP 1
     i.industry_name,
     SUM(j.value) AS total_weekly_payroll
@@ -311,3 +327,39 @@ JOIN industry AS i
 WHERE s.data_type_code = 30  -- total weekly payroll
 GROUP BY i.industry_name
 ORDER BY SUM(j.value) DESC;
+
+/*In which industries did production and nonsupervisory employees fare better?
+
+7	AVERAGE WEEKLY HOURS OF PRODUCTION AND NONSUPERVISORY EMPLOYEES
+8	AVERAGE HOURLY EARNINGS OF PRODUCTION AND NONSUPERVISORY EMPLOYEES
+
+30	AVERAGE WEEKLY EARNINGS OF PRODUCTION AND NONSUPERVISORY EMPLOYEES
+31	AVERAGE WEEKLY EARNINGS OF PRODUCTION AND NONSUPERVISORY EMPLOYEES
+32	AVERAGE HOURLY EARNINGS OF PRODUCTION AND NONSUPERVISORY EMPLOYEES
+33	AVERAGE HOURLY EARNINGS OF PRODUCTION AND NONSUPERVISORY EMPLOYEES
+
+81	AGGREGATE WEEKLY HOURS OF PRODUCTION AND NONSUPERVISORY EMPLOYEES
+82	AGGREGATE WEEKLY PAYROLLS OF PRODUCTION AND NONSUPERVISORY EMPLOYEES
+83	AGGREGATE WEEKLY OVERTIME HOURS OF PRODUCTION AND NONSUPERVISORY EMPLOYEES
+
+*/
+
+USE LaborStatisticsDB
+SELECT TOP 5
+    i.industry_name,
+    AVG(j.value) AS new_column
+FROM january_2017 AS j
+JOIN series AS s 
+    ON j.series_id = s.series_id
+JOIN industry AS i 
+    ON s.industry_code = i.industry_code
+WHERE s.data_type_code = 31
+GROUP BY i.industry_name
+ORDER BY new_column DESC;
+
+
+Reinsurance carriers	1810.585
+Petroleum and coal products	1802.435
+Fossil fuel electric power generation	1778.235
+Pipeline transportation	1733.48
+Electric power generation	1726.72
