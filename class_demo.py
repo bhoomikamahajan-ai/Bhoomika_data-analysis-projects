@@ -34,5 +34,4 @@ a = 2
 b = 3
 result = a ** b + (10-4)/2
 print("Result:",round(result))
-'''
-print(10 % 3)
+'
