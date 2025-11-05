@@ -18,9 +18,10 @@ for num in range(12,-15,-2):
     print(num)
 
 '''
-    # d. Challenge - Print the numbers 50 - 20 in descending order, but only if the numbers are multiples of 3. (Your code should work even if you replace 50 or 20 with other numbers).
+    # d. Challenge - Print the numbers 50 - 20 in descending order, but only if the numbers are multiples of 3. 
+    # (Your code should work even if you replace 50 or 20 with other numbers).
 
-for num in range(50,20,-1):
+for num in range(50, 19, -1):
     if num % 3 == 0:
         print(num,"is multiple of 3")
 
