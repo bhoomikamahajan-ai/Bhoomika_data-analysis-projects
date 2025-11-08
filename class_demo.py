@@ -1,37 +1,19 @@
-'''print(type(5))
-print(type(5.0))
-print(type("5"))
 
-print(5 * 2)
+# num_1 = int(input("Number1: "))
+# num_2 = int(input("Number2: "))
+# # sum = num_1 + num_2
+# print(f"sum is:", num_1 + num_2)
 
-print("5" * 2)
+# num_1 = float(input("Number1: "))
+# num_2 = float(input("Number2: "))
 
-budget = "1000"
-print(type(budget))
-print(budget * 2)
-budget = int(budget)
-print( budget * 2)
-print("Data" + "Science")
-
-print(5  + 5)
-salary = 80000
-print ("salary:" + str(salary))
+# average = (num_1 + num_2)/2
+# print(average)
 
 
-year = 2025
-month = 10
-# print("Date:" + year + "-" + month)
-print("Date:" + str(year) + "-" + str(month))
-
-print("Date:", year,"-",month)
-
-print(f"Date: {year} - {month}") # formatted string
-
-
-print(f"Banan stand Profit: ${100-20}")
-
-a = 2
-b = 3
-result = a ** b + (10-4)/2
-print("Result:",round(result))
-'
+a = int(input("Number1: "))
+b = int(input("Number2: "))
+if a >= b:
+    print("True")
+else:
+    print("False")

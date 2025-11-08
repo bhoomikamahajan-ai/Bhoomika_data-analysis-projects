@@ -21,31 +21,36 @@ for s in strings:
 
 for s in strings:
     if "," in s:
-        parts_as_array = s.split(',')
-        print(parts_as_array)
-
-        reversed_array = parts_as_array[::-1]
-        print(reversed_array)
-
-        comma_separated_string = ','.join(reversed_array)
-        print(comma_separated_string)
+        parts = s.split(',')
+        parts.reverse()
+        new_string = ','.join(parts)
+        print(new_string)
 
 # c) If the string uses semicolons to separate the words, split it into an array, alphabetize the entries, and then join the array into a new comma separated string.
 
 for s in strings:
     if ";" in s:
-        parts_as_array = s.split(',')
-        print(parts_as_array)
-
-        reversed_array = parts_as_array[::-1]
-        print(reversed_array)
-
-        comma_separated_string = ','.join(reversed_array)
-        print(comma_separated_string)
+        parts = s.split(';')
+        parts.sort()
+        new_string = '-'.join(parts)
+        print(new_string)
 
 
 # d) If the string uses spaces to separate the words, split it into an array, reverse alphabetize the entries, and then join the array into a new space separated string.
 
+for s in strings:
+    if " " in s:
+        parts = s.split(' ')
+        parts.reverse()
+        new_string = ' '.join(parts)
+        print(new_string)
 
 
 # e) If the string uses ‘comma spaces’ to separate the list, modify your code to produce the same result as part “b”, making sure that the extra spaces are NOT part of the final string.
+
+for s in strings:
+    if ", " in s:
+        parts = s.split(',')
+        parts.reverse()
+        new_string = ','.join(parts)
+        print(new_string)
